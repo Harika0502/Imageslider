@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Image Slider</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color:  #d0bdf4;
+        }
+        .slider {
+            position: relative;
+            max-width: 800px;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .slide {
+            min-width: 100%;
+            transition: transform 0.5s;
+        }
+        .slide img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .prev { left: 10px; }
+        .next { right: 10px; }
+        @media (max-width: 600px) {
+            .prev, .next {
+                padding: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slider">
+        <div class="slides">
+            <div class="slide"><img src="https://www.tourmyindia.com/blog//wp-content/uploads/2021/03/Popular-Temples-in-India.jpg" alt="Slide 1"></div>
+            <div class="slide"><img src="https://static.wixstatic.com/media/537d91_14cd3a934957447f9d594c0ff514bf48~mv2.png/v1/fill/w_568,h_458,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/537d91_14cd3a934957447f9d594c0ff514bf48~mv2.png" alt="Slide 2"></div>
+            <div class="slide"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Tirumala_090615.jpg" alt="Slide 3"></div>
+            <div class="slide"><img src="https://media.cnn.com/api/v1/images/stellar/prod/190410095005-india-temples-mahabodhi-temple.jpg?q=w_2000,h_1248,x_0,y_0,c_fill" alt="Slide 4"></div>
+            <div class="slide"><img src="https://dwq3yv87q1b43.cloudfront.net/public/blogs/17382411131532-687926856.png" alt="Slide 5"></div>
+            <div class="slide"><img src="https://media.seniority.in/wysiwyg/golden_temple.jpg" alt="Slide 6"></div>
+            <div class="slide"><img src="https://www.tourmyindia.com/blog//wp-content/uploads/2021/03/Sri-Ranganathaswamy-Temple-Karnataka.jpg" alt="Slide 7"></div>
+        </div>
+        <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+        <button class="next" onclick="moveSlide(1)">&#10095;</button>
+    </div>
+    <script>
+        let index = 0;
+        function moveSlide(step) {
+            const slides = document.querySelector('.slides');
+            const totalSlides = document.querySelectorAll('.slide').length;
+            index += step;
+            if (index < 0) index = totalSlides - 1;
+            if (index >= totalSlides) index = 0;
+            slides.style.transform = `translateX(-${index * 100}%)`;
+        }
+        function autoSlide() {
+            moveSlide(1);
+        }
+        setInterval(autoSlide, 2000);
+    </script>
+</body>
+</html>
